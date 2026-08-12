@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://iidgwjt4pv1s"]
+
+[ext_resource type="Script" uid="uid://c17u0sdmnsicj" path="res://scripts/game_manager.gd" id="1_71j4m"]
+[ext_resource type="TileSet" uid="uid://di0tvoj2lo1ci" path="res://assets/build_tile_set.tres" id="2_k0juu"]
+[ext_resource type="PackedScene" uid="uid://cd74pyhvay3by" path="res://scenes/player.tscn" id="2_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://cdupvh734iu54" path="res://scenes/exit.tscn" id="3_7r4gi"]
+[ext_resource type="Script" uid="uid://bquh4ud22fmo6" path="res://scripts/level_builder.gd" id="3_71j4m"]
+[ext_resource type="Texture2D" uid="uid://8mdupjygk4v5" path="res://assets/brick.png" id="4_4mrxx"]
+[ext_resource type="Texture2D" uid="uid://cjny5i2vcl2b6" path="res://assets/coin.png" id="5_7r4gi"]
+[ext_resource type="PackedScene" uid="uid://p2tnx04fsw2w" path="res://scenes/ui.tscn" id="6_qfnet"]
+[ext_resource type="Texture2D" uid="uid://cwagukjirypbw" path="res://assets/spike.png" id="6_w7kh3"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_3cxec"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_krauj"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_q5onr"]
+a = Vector2(0, 16)
+b = Vector2(480, 16)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ytpe4"]
+b = Vector2(480, 0)
+
+[node name="World" type="Node2D" unique_id=2119915315]
+script = ExtResource("1_71j4m")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=89586091]
+self_modulate = Color(0.6509804, 0.73333335, 0.7647059, 1)
+position = Vector2(240.00002, 160)
+scale = Vector2(480, 320)
+texture = SubResource("CanvasTexture_3cxec")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1024609700]
+texture_filter = 1
+tile_map_data = PackedByteArray(0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 29, 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+tile_set = ExtResource("2_k0juu")
+
+[node name="TopBoundary" type="StaticBody2D" parent="." unique_id=1946810573]
+disable_mode = 1
+physics_material_override = SubResource("PhysicsMaterial_krauj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopBoundary" unique_id=2132005715]
+shape = SubResource("SegmentShape2D_q5onr")
+
+[node name="BottomBoundary" type="Area2D" parent="." unique_id=59092828]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomBoundary" unique_id=604295080]
+position = Vector2(0, 320)
+shape = SubResource("SegmentShape2D_ytpe4")
+
+[node name="Exit" parent="." unique_id=1351766811 instance=ExtResource("3_7r4gi")]
+position = Vector2(472, 288)
+
+[node name="LevelBuilder" type="Node" parent="." unique_id=189248045]
+script = ExtResource("3_71j4m")
+brick_texture = ExtResource("4_4mrxx")
+collectible_texture = ExtResource("5_7r4gi")
+spike_texture = ExtResource("6_w7kh3")
+
+[node name="PlacementPreview" type="Sprite2D" parent="LevelBuilder" unique_id=769757026]
+self_modulate = Color(1, 1, 1, 0.45000002)
+z_index = 5
+texture_filter = 1
+
+[node name="UI" parent="." unique_id=248340466 instance=ExtResource("6_qfnet")]
+
+[node name="Player" parent="." unique_id=582869663 instance=ExtResource("2_rwgxs")]
+position = Vector2(8, 32)
+
+[node name="PlayerSpawn" type="Marker2D" parent="." unique_id=2043923237]
+position = Vector2(8, 32)
+gizmo_extents = 0.0
+
+[connection signal="body_entered" from="BottomBoundary" to="." method="_on_bottom_boundary_body_entered"]
+[connection signal="completed" from="Exit" to="." method="_on_exit_completed"]
+[connection signal="level_changed" from="LevelBuilder" to="." method="_on_level_builder_level_changed"]
+[connection signal="brick_selected" from="UI" to="LevelBuilder" method="_on_ui_brick_selected"]
+[connection signal="collectible_selected" from="UI" to="LevelBuilder" method="_on_ui_collectible_selected"]
+[connection signal="edit_selected" from="UI" to="LevelBuilder" method="_on_ui_edit_selected"]
+[connection signal="play_selected" from="UI" to="LevelBuilder" method="_on_ui_play_selected"]
+[connection signal="spike_selected" from="UI" to="LevelBuilder" method="_on_ui_spike_selected"]
+[connection signal="died" from="Player" to="." method="_on_player_died"]

@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://p2tnx04fsw2w"]
+
+[ext_resource type="Theme" uid="uid://cvgbt5bd2tj07" path="res://assets/ui_theme.tres" id="1_gdt2y"]
+[ext_resource type="Script" uid="uid://da8j8df50iswy" path="res://scripts/ui.gd" id="1_wm3ai"]
+[ext_resource type="Texture2D" uid="uid://8mdupjygk4v5" path="res://assets/brick.png" id="1_yev5y"]
+[ext_resource type="Texture2D" uid="uid://cjny5i2vcl2b6" path="res://assets/coin.png" id="2_gdt2y"]
+[ext_resource type="Texture2D" uid="uid://cwagukjirypbw" path="res://assets/spike.png" id="3_wm3ai"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nt7q6"]
+font_size = 11
+
+[sub_resource type="LabelSettings" id="LabelSettings_xlq6p"]
+font_size = 90
+outline_size = 25
+outline_color = Color(0, 0, 0, 1)
+
+[node name="UI" type="Control" unique_id=248340466]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_wm3ai")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=558323801]
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 16.0
+color = Color(0, 0.18431373, 0.25882354, 1)
+
+[node name="Counter" type="Label" parent="." unique_id=964978465]
+layout_mode = 0
+offset_left = 16.0
+offset_right = 48.0
+offset_bottom = 16.0
+text = "0/1"
+label_settings = SubResource("LabelSettings_nt7q6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WinMessage" type="Label" parent="." unique_id=2017566020]
+visible = false
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 320.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "YOU WIN!"
+label_settings = SubResource("LabelSettings_xlq6p")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TopBar" type="HBoxContainer" parent="." unique_id=1815628325]
+layout_mode = 0
+offset_left = 425.0
+offset_top = 2.0
+offset_right = 531.0
+offset_bottom = 26.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("1_gdt2y")
+
+[node name="Edit" type="Button" parent="TopBar" unique_id=1233742235]
+layout_mode = 2
+text = "Edit"
+
+[node name="Play" type="Button" parent="TopBar" unique_id=1244119782]
+layout_mode = 2
+action_mode = 0
+text = "Play"
+
+[node name="Reset" type="Button" parent="TopBar" unique_id=630864728]
+layout_mode = 2
+action_mode = 0
+text = "Reset"
+
+[node name="BuildBar" type="VBoxContainer" parent="." unique_id=1095781428]
+texture_filter = 1
+layout_mode = 0
+offset_left = 432.0
+offset_top = 24.0
+offset_right = 512.0
+offset_bottom = 104.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("1_gdt2y")
+accessibility_region = true
+
+[node name="Brick" type="Button" parent="BuildBar" unique_id=184163294]
+texture_filter = 1
+layout_mode = 2
+text = "1. Brick"
+icon = ExtResource("1_yev5y")
+alignment = 0
+expand_icon = true
+
+[node name="Collectible" type="Button" parent="BuildBar" unique_id=830467173]
+texture_filter = 1
+layout_mode = 2
+text = "2. Coin"
+icon = ExtResource("2_gdt2y")
+alignment = 0
+expand_icon = true
+
+[node name="Spike" type="Button" parent="BuildBar" unique_id=1526276403]
+texture_filter = 1
+layout_mode = 2
+text = "3. Spike"
+icon = ExtResource("3_wm3ai")
+alignment = 0
+expand_icon = true
+
+[connection signal="pressed" from="TopBar/Edit" to="." method="_on_edit_pressed"]
+[connection signal="pressed" from="TopBar/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="TopBar/Reset" to="." method="_on_reset_pressed"]
+[connection signal="pressed" from="BuildBar/Brick" to="." method="_on_brick_pressed"]
+[connection signal="pressed" from="BuildBar/Collectible" to="." method="_on_collectible_pressed"]
+[connection signal="pressed" from="BuildBar/Spike" to="." method="_on_spike_pressed"]

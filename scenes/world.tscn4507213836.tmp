@@ -1,0 +1,66 @@
+[gd_scene format=4 uid="uid://iidgwjt4pv1s"]
+
+[ext_resource type="Texture2D" uid="uid://chdunr1sftw5k" path="res://assets/tiles.png" id="1_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://cd74pyhvay3by" path="res://scenes/player.tscn" id="2_rwgxs"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_3cxec"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4wyf3"]
+texture = ExtResource("1_rwgxs")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_ytpe4"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_4wyf3")
+
+[sub_resource type="GDScript" id="GDScript_k0juu"]
+script/source = "extends CharacterBody2D
+
+
+const SPEED = 300.0
+const JUMP_VELOCITY = -400.0
+
+
+func _physics_process(delta: float) -> void:
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+
+	# Handle jump.
+	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var direction := Input.get_axis(\"ui_left\", \"ui_right\")
+	if direction:
+		$AnimatedSprite2D.play()
+		velocity.x = direction * SPEED
+		$AnimatedSprite2D.flip_h = direction < 0
+	else:
+		$AnimatedSprite2D.stop()
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+		
+
+	move_and_slide()
+	position.x = clamp(position.x,0, 480)
+"
+
+[node name="World" type="Node2D" unique_id=2119915315]
+
+[node name="Background" type="Sprite2D" parent="." unique_id=89586091]
+self_modulate = Color(0.6509804, 0.73333335, 0.7647059, 1)
+position = Vector2(240.00002, 160)
+scale = Vector2(480, 320)
+texture = SubResource("CanvasTexture_3cxec")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1024609700]
+texture_filter = 1
+tile_map_data = PackedByteArray("AAAAABMAAAAAAAAAAAABABMAAAAAAAAAAAACABMAAAAAAAAAAAADABMAAAAAAAAAAAAEABMAAAAAAAAAAAAFABMAAAAAAAAAAAAGABMAAAAAAAAAAAAHABMAAAAAAAAAAAAIABMAAAAAAAAAAAAJABMAAAAAAAAAAAAKABMAAAAAAAAAAAALABMAAAAAAAAAAAAMABMAAAAAAAAAAAANABMAAAAAAAAAAAAOABMAAAAAAAAAAAAdABMAAAAAAAAAAAAcABMAAAAAAAAAAAAbABMAAAAAAAAAAAAaABMAAAAAAAAAAAAUAA0AAAAAAAAAAAAYABAAAAAAAAAAAAAXABAAAAAAAAAAAAAVAA0AAAAAAAAAAAAUAAoAAAAAAAAAAAAUAAsAAAAAAAAAAAAUAAwAAAAAAAAAAAATAAoAAAAAAAAAAAAOAAoAAAAAAAAAAAAOAAsAAAAAAAAAAAAOAAwAAAAAAAAAAAAOAA0AAAAAAAAAAAAOAA4AAAAAAAAAAAAOAA8AAAAAAAAAAAAOABAAAAAAAAAAAAAOABEAAAAAAAAAAAAOABIAAAAAAAAAAAAJABAAAAAAAAAAAAAIABAAAAAAAAAAAAAGAA0AAAAAAAAAAAAFAA0AAAAAAAAAAAAEAA0AAAAAAAAAAAAJAAoAAAAAAAAAAAAKAAoAAAAAAAAAAAAKABAAAAAAAAAAAAALAAoAAAAAAAAAAAAWAAYAAAAAAAAAAAAXAAYAAAAAAAAAAAAYAAYAAAAAAAAAAAAaAAMAAAAAAAAAAAAbAAMAAAAAAAAAAAAcAAMAAAAAAAAAAAAPABMAAAAAAAAAAAAQABMAAAAAAAAAAAARABMAAAAAAAAAAAASABMAAAAAAAAAAAATABMAAAAAAAAAAAAUABMAAAAAAAAAAAAVABMAAAAAAAAAAAAWABMAAAAAAAAAAAAXABMAAAAAAAAAAAAYABMAAAAAAAAAAAAZABMAAAAAAAAAAAAYABIAAAAAAAAAAAAYABEAAAAAAAAAAAAXABIAAAAAAAAAAAAXABEAAAAAAAAAAAAWABEAAAAAAAAAAAAWABIAAAAAAAAAAAAWABAAAAAAAAAAAAAWAA8AAAAAAAAAAAAWAA4AAAAAAAAAAAAVAA4AAAAAAAAAAAAVAA8AAAAAAAAAAAAVABAAAAAAAAAAAAAVABEAAAAAAAAAAAAUABEAAAAAAAAAAAAUABIAAAAAAAAAAAAVABIAAAAAAAAAAAAUABAAAAAAAAAAAAAUAA8AAAAAAAAAAAAUAA4AAAAAAAAAAAATABAAAAAAAAAAAAATABEAAAAAAAAAAAATABIAAAAAAAAAAAATAA8AAAAAAAAAAAATAA4AAAAAAAAAAAATAA0AAAAAAAAAAAATAAwAAAAAAAAAAAATAAsAAAAAAAAAAAAPAAoAAAAAAAAAAAAPAAsAAAAAAAAAAAAPAAwAAAAAAAAAAAAPAA0AAAAAAAAAAAAPAA4AAAAAAAAAAAAPAA8AAAAAAAAAAAAPABAAAAAAAAAAAAAPABEAAAAAAAAAAAAPABIAAAAAAAAAAAAWAA0AAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_ytpe4")
+
+[node name="Player" parent="." unique_id=582869663 instance=ExtResource("2_rwgxs")]
+position = Vector2(25.000002, 286.00003)
+scale = Vector2(1.84, 1.84)
+script = SubResource("GDScript_k0juu")

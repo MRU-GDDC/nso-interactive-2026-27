@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://cdupvh734iu54"]
+
+[ext_resource type="Texture2D" uid="uid://bwy3p45tpa8v8" path="res://assets/exit.png" id="1_l0aq0"]
+[ext_resource type="Script" uid="uid://dvxfncsd68h1e" path="res://scripts/exit.gd" id="1_uyw7u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uyw7u"]
+atlas = ExtResource("1_l0aq0")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l5n14"]
+atlas = ExtResource("1_l0aq0")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ytpe4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uyw7u")
+}],
+"loop": 1,
+"name": &"closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l5n14")
+}],
+"loop": 1,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_krauj"]
+size = Vector2(16, 27)
+
+[node name="Exit" type="Area2D" unique_id=1351766811]
+script = ExtResource("1_uyw7u")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1389444820]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_ytpe4")
+animation = &"open"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=780397305]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_krauj")
+
+[node name="WinTimer" type="Timer" parent="." unique_id=1794878338]
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="WinTimer" to="." method="_on_win_timer_timeout"]
