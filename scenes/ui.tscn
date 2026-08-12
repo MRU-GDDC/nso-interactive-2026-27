@@ -71,7 +71,6 @@ action_mode = 0
 text = "Reset"
 
 [node name="BuildBar" type="VBoxContainer" parent="." unique_id=1095781428]
-texture_filter = 1
 layout_mode = 0
 offset_left = 432.0
 offset_top = 24.0
@@ -82,7 +81,6 @@ theme = ExtResource("1_gdt2y")
 accessibility_region = true
 
 [node name="Brick" type="Button" parent="BuildBar" unique_id=184163294]
-texture_filter = 1
 layout_mode = 2
 text = "1. Brick"
 icon = ExtResource("1_yev5y")
@@ -90,7 +88,6 @@ alignment = 0
 expand_icon = true
 
 [node name="Collectible" type="Button" parent="BuildBar" unique_id=830467173]
-texture_filter = 1
 layout_mode = 2
 text = "2. Coin"
 icon = ExtResource("2_gdt2y")
@@ -98,7 +95,6 @@ alignment = 0
 expand_icon = true
 
 [node name="Spike" type="Button" parent="BuildBar" unique_id=1526276403]
-texture_filter = 1
 layout_mode = 2
 text = "3. Spike"
 icon = ExtResource("3_wm3ai")

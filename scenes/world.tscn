@@ -31,7 +31,6 @@ scale = Vector2(480, 320)
 texture = SubResource("CanvasTexture_3cxec")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1024609700]
-texture_filter = 1
 tile_map_data = PackedByteArray(0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 29, 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 tile_set = ExtResource("2_k0juu")
 
@@ -60,7 +59,6 @@ spike_texture = ExtResource("6_w7kh3")
 [node name="PlacementPreview" type="Sprite2D" parent="LevelBuilder" unique_id=769757026]
 self_modulate = Color(1, 1, 1, 0.45000002)
 z_index = 5
-texture_filter = 1
 
 [node name="UI" parent="." unique_id=248340466 instance=ExtResource("6_qfnet")]
 
