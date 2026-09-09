@@ -9,6 +9,7 @@ var item_collected: int = 0
 var max_item: int = 0
 
 func _ready() -> void:
+	await get_tree().process_frame
 	refresh_collectibles()
 
 
@@ -62,6 +63,8 @@ func update_counter() -> void:
 
 func win_game() -> void:
 	win_message.show()
+	await get_tree().create_timer(2.0).timeout
+	restart()
 
 
 func _on_bottom_boundary_body_entered(body: Node2D) -> void:

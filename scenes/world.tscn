@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://iidgwjt4pv1s"]
+[gd_scene format=4 uid="uid://iidgwjt4pv1s"]
 
 [ext_resource type="Script" uid="uid://c17u0sdmnsicj" path="res://scripts/game_manager.gd" id="1_71j4m"]
 [ext_resource type="TileSet" uid="uid://di0tvoj2lo1ci" path="res://assets/build_tile_set.tres" id="2_k0juu"]
@@ -31,7 +31,7 @@ scale = Vector2(480, 320)
 texture = SubResource("CanvasTexture_3cxec")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1024609700]
-tile_map_data = PackedByteArray(0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 29, 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+tile_map_data = PackedByteArray("AAAAAAMAAAAAAAAAAAABAAMAAAAAAAAAAAAdABMAAAAAAAAAAAAcABMAAAAAAAAAAAAbABMAAAAAAAAAAAACAAMAAAAAAAAAAAADAAIAAQAAAAAAAAAaABMAAAAAAAAAAAADAAMAAAAAAAAAAAADAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAEAAUAAAAAAAAAAAAJAAsAAAAAAAAAAAAIAAsAAAAAAAAAAAAHAAsAAAAAAAAAAAAGAAsAAAAAAAAAAAAAAA4AAAAAAAAAAAABAA4AAAAAAAAAAAACAA4AAAAAAAAAAAAZABMAAAAAAAAAAAAZABIAAAAAAAAAAAAYABIAAAAAAAAAAAAYABEAAAAAAAAAAAABAAsAAQAAAAAAAAAIAAQAAQAAAAAAAAAbABEAAQAAAAAAAAAFAAUAAAAAAAAAAAAFAAYAAAAAAAAAAAAGAAYAAAAAAAAAAAAHAAYAAAAAAAAAAAAIAAYAAAAAAAAAAAAKAAYAAAAAAAAAAAAJAAYAAAAAAAAAAAAOAAoAAAAAAAAAAAANAAoAAAAAAAAAAAAKAAsAAAAAAAAAAAALAAsAAAAAAAAAAAAGABEAAAAAAAAAAAAHABEAAAAAAAAAAAAIABEAAAAAAAAAAAAJABEAAAAAAAAAAAAKABEAAAAAAAAAAAALABEAAAAAAAAAAAAMABEAAAAAAAAAAAAPABAAAAAAAAAAAAAQABAAAAAAAAAAAAASAA8AAAAAAAAAAAARAA8AAAAAAAAAAAAQAA8AAAAAAAAAAAAVABAAAAAAAAAAAAAUABAAAAAAAAAAAAATABAAAAAAAAAAAAATAA8AAAAAAAAAAAASABAAAAAAAAAAAAARABAAAAAAAAAAAAALAA8AAQAAAAAAAAAJABAAAQAAAAAAAQAUAA8AAAAAAAAAAAAPAAoAAAAAAAAAAAASAA4AAAAAAAAAAAASAA0AAQAAAAAAAAAFABEAAAAAAAAAAAADAA4AAAAAAAAAAAAEAAoAAAAAAAAAAAAFAAoAAAAAAAAAAAAFAAsAAAAAAAAAAAAIAAoAAQAAAAAAAQAMAAsAAAAAAAAAAAANAAsAAAAAAAAAAAANAAgAAQAAAAAAAAA=")
 tile_set = ExtResource("2_k0juu")
 
 [node name="TopBoundary" type="StaticBody2D" parent="." unique_id=1946810573]
@@ -69,6 +69,15 @@ position = Vector2(8, 32)
 position = Vector2(8, 32)
 gizmo_extents = 0.0
 
+[connection signal="body_entered" from="TileMapLayer/@Area2D@27729" to="TileMapLayer/@Area2D@27729" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@27795" to="TileMapLayer/@Area2D@27795" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@27798" to="TileMapLayer/@Area2D@27798" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@27799" to="TileMapLayer/@Area2D@27799" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@27847" to="TileMapLayer/@Area2D@27847" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/Spike" to="TileMapLayer/Spike" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/Collectible" to="TileMapLayer/Collectible" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@27872" to="TileMapLayer/@Area2D@27872" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMapLayer/@Area2D@27875" to="TileMapLayer/@Area2D@27875" method="_on_body_entered"]
 [connection signal="body_entered" from="BottomBoundary" to="." method="_on_bottom_boundary_body_entered"]
 [connection signal="completed" from="Exit" to="." method="_on_exit_completed"]
 [connection signal="level_changed" from="LevelBuilder" to="." method="_on_level_builder_level_changed"]
