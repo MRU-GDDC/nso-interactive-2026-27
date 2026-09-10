@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 signal died
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+const SPEED = 250.0
+const JUMP_VELOCITY = -300.0
 
 func _ready() -> void:
 	Globals.player = self
